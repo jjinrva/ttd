@@ -69,3 +69,20 @@ Compose mounts:
 ## Notes on extraction support
 - PDF and DOCX parsing is implemented with `pypdf` and `python-docx`.
 - Very large/binary/complex formats outside listed support are intentionally rejected.
+
+
+## Deployment troubleshooting (Portainer / Local Page)
+If you see:
+`Failed to deploy a stack: failed to create compose project: failed to load the compose file : open /data/compose/1/docker-compose.yml: no such file or directory`
+
+Use these checks:
+1. Ensure the project folder imported in Local Page is exactly `/mnt/Code/meme_gen`.
+2. Ensure a compose file exists in that folder. This repo now ships **both** `docker-compose.yml` and `compose.yaml` for compatibility.
+3. If you copied files manually, verify ownership/readability for Local Page/Portainer user.
+4. Re-import the project path in Local Page after confirming the files exist.
+
+Quick verify on host:
+```bash
+cd /mnt/Code/meme_gen
+ls -l docker-compose.yml compose.yaml project.json
+```

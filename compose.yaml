@@ -1,0 +1,25 @@
+services:
+  web:
+    build: .
+    pull_policy: never
+    ports:
+      - "127.0.0.1:10001:8080"
+    environment:
+      - APP_ID=meme_gen
+      - OUTPUT_DIR=/mnt/outputs
+      - DATA_DIR=/data
+      - MODELS_DIR=/mnt/models
+      - MAX_FETCH_MB=100
+      - USE_GPU=1
+    volumes:
+      - /mnt/data:/mnt/data:rw
+      - /mnt/models:/mnt/models:ro
+      - /mnt/Pablo/memes/images:/mnt/outputs:rw
+      - /var/lib/meme_gen:/data:rw
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
