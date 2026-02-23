@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Default Meme",
+    "selected_tones": ["funny"],
+    "default_word_count": 12,
+    "default_line_count": 2,
+    "default_size_preset": "1080x1080",
+    "default_background_mode": "solid",
+    "default_text_template": "top_bottom",
+    "default_model": "",
+    "default_llm_parameters": {
+      "context_length": 2048,
+      "temperature": 0.4,
+      "top_p": 0.9,
+      "repeat_penalty": 1.1,
+      "max_tokens": 96
+    }
+  }
+]

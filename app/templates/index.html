@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meme Gen</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header><h1>Meme Generator</h1></header>
+  <nav>
+    <button onclick="showTab('generator')">Generator</button>
+    <button onclick="showTab('gallery')">Gallery</button>
+    <button onclick="showTab('settings')">Settings</button>
+  </nav>
+
+  <section id="generator" class="tab active">
+    <h2>Generator</h2>
+    <label>Source mode <select id="source_mode"><option>url</option><option>file</option><option>both</option></select></label>
+    <input id="url" placeholder="https://..." />
+    <input id="files" type="file" multiple />
+    <input id="excerpt_chars" type="number" value="10000" />
+    <input id="max_fetch_override" type="number" value="0" placeholder="max fetch override MB" />
+    <button onclick="extractContent()">Fetch & Extract</button>
+    <textarea id="preview" rows="8" placeholder="Extracted text preview"></textarea>
+    <div id="counts"></div>
+
+    <div>
+      <h3>Text generation</h3>
+      <select id="model"></select><button onclick="rescanModels()">Rescan Models</button>
+      <div id="tone_checks"></div>
+      <input id="word_count" type="number" value="12" />
+      <input id="line_count" type="number" value="2" />
+      <input id="variants" type="number" value="1" />
+      <button onclick="generateText()">Generate Variants</button>
+      <div id="jobs"></div>
+    </div>
+
+    <div>
+      <h3>Render</h3>
+      <select id="size_preset"><option>1080x1080</option><option>1920x1080</option><option>1080x1920</option><option>1200x628</option><option>custom</option></select>
+      <input id="custom_w" type="number" placeholder="width" />
+      <input id="custom_h" type="number" placeholder="height" />
+      <select id="bg_mode"><option value="solid">Solid</option><option value="upload">Upload</option><option value="ai">AI</option></select>
+      <input id="solid_color" type="color" value="#202020" />
+      <input id="bg_file" type="file" />
+      <select id="template"><option value="top_bottom">Top and bottom classic</option><option value="center_caption">Center caption</option><option value="three_panel">Three panel</option><option value="freeform_two">Freeform two blocks</option></select>
+      <select id="font_name"></select>
+      <input id="font_size" type="number" value="56" />
+      <label><input id="bold" type="checkbox" />Bold</label>
+      <input id="line_spacing" type="number" value="8" />
+      <label><input id="outline" type="checkbox" checked />Outline</label>
+      <input id="outline_thickness" type="number" value="3" />
+      <label><input id="shadow" type="checkbox" checked />Shadow</label>
+      <button onclick="renderFromCompleted()">Render Selected Completed Variants</button>
+      <div id="render_status"></div>
+    </div>
+  </section>
+
+  <section id="gallery" class="tab">
+    <h2>Gallery</h2>
+    <button onclick="loadGallery()">Refresh</button>
+    <div id="gallery_items" class="grid"></div>
+  </section>
+
+  <section id="settings" class="tab">
+    <h2>Settings</h2>
+    <textarea id="settings_json" rows="12"></textarea>
+    <button onclick="saveSettings()">Save Settings</button>
+    <h3>Tones</h3>
+    <textarea id="tones_json" rows="10"></textarea>
+    <button onclick="saveTones()">Save Tones</button>
+    <h3>Presets</h3>
+    <textarea id="presets_json" rows="10"></textarea>
+    <button onclick="savePresets()">Save Presets</button>
+  </section>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
