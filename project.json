@@ -1,0 +1,7 @@
+{
+  "id": "meme_gen",
+  "host_port": 10001,
+  "route_path": "/meme_gen",
+  "service": "web",
+  "desired_state": "inactive"
+}
